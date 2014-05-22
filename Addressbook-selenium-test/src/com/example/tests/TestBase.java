@@ -1,18 +1,15 @@
 package com.example.tests;
 
-import static org.junit.Assert.fail;
-
+import static org.testng.Assert.fail;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 
 public class TestBase {
@@ -100,5 +97,45 @@ public class TestBase {
 	      acceptNextAlert = true;
 	    }
 	  }
+
+	protected void returnToHomePage() {
+	    driver.findElement(By.linkText("home page")).click();
+	}
+
+	protected void submitContactCreation() {
+	    driver.findElement(By.name("submit")).click();
+	}
+
+	protected void fillNewContactForm(ContactDate Contact) {
+	    driver.findElement(By.name("firstname")).clear();
+	    driver.findElement(By.name("firstname")).sendKeys(Contact.firstName);
+	    driver.findElement(By.name("lastname")).clear();
+	    driver.findElement(By.name("lastname")).sendKeys(Contact.lastName);
+	    driver.findElement(By.name("address")).clear();
+	    driver.findElement(By.name("address")).sendKeys(Contact.address);
+	    driver.findElement(By.name("home")).clear();
+	    driver.findElement(By.name("home")).sendKeys(Contact.phoneHome);
+	    driver.findElement(By.name("mobile")).clear();
+	    driver.findElement(By.name("mobile")).sendKeys(Contact.phoneMobile);
+	    driver.findElement(By.name("work")).clear();
+	    driver.findElement(By.name("work")).sendKeys(Contact.phoneWork);
+	    driver.findElement(By.name("email")).clear();
+	    driver.findElement(By.name("email")).sendKeys(Contact.mail_1);
+	    driver.findElement(By.name("email2")).clear();
+	    driver.findElement(By.name("email2")).sendKeys(Contact.mail_2);
+	    new Select(driver.findElement(By.name(Contact.bday))).selectByVisibleText("1");
+	    new Select(driver.findElement(By.name(Contact.bmonth))).selectByVisibleText("January");
+	    driver.findElement(By.name("byear")).clear();
+	    driver.findElement(By.name("byear")).sendKeys(Contact.year);
+	    new Select(driver.findElement(By.name(Contact.contactInGroup))).selectByVisibleText("group name 1");
+	    driver.findElement(By.name("address2")).clear();
+	    driver.findElement(By.name("address2")).sendKeys(Contact.address2);
+	    driver.findElement(By.name("phone2")).clear();
+	    driver.findElement(By.name("phone2")).sendKeys(Contact.home2);
+	}
+
+	protected void gotoAddNewContactPage() {
+	    driver.findElement(By.linkText("add new")).click();
+	}
 
 }
