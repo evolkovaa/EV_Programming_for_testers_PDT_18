@@ -1,5 +1,7 @@
 package com.example.tests;
 
+
+import org.testng.Assert;
 import static org.testng.Assert.fail;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
@@ -19,6 +21,7 @@ public class TestBase {
 	private static boolean acceptNextAlert = true;
 	private static StringBuffer verificationErrors = new StringBuffer();
 
+
 	@BeforeTest
 	public void setUp() throws Exception {
 	    driver = new FirefoxDriver();
@@ -26,12 +29,13 @@ public class TestBase {
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  }
 	
+
 	@AfterTest
 	public void tearDown() throws Exception {
 	    driver.quit();
 	    String verificationErrorString = verificationErrors.toString();
 	    if (!"".equals(verificationErrorString)) {
-	      fail(verificationErrorString);
+	      Assert.fail(verificationErrorString);
 	    }
 	  }
 	
@@ -123,16 +127,19 @@ public class TestBase {
 	    driver.findElement(By.name("email")).sendKeys(Contact.mail_1);
 	    driver.findElement(By.name("email2")).clear();
 	    driver.findElement(By.name("email2")).sendKeys(Contact.mail_2);
-	    new Select(driver.findElement(By.name(Contact.bday))).selectByVisibleText("1");
-	    new Select(driver.findElement(By.name(Contact.bmonth))).selectByVisibleText("January");
-	    driver.findElement(By.name("byear")).clear();
-	    driver.findElement(By.name("byear")).sendKeys(Contact.year);
-	    new Select(driver.findElement(By.name(Contact.contactInGroup))).selectByVisibleText("group name 1");
 	    driver.findElement(By.name("address2")).clear();
 	    driver.findElement(By.name("address2")).sendKeys(Contact.address2);
 	    driver.findElement(By.name("phone2")).clear();
 	    driver.findElement(By.name("phone2")).sendKeys(Contact.home2);
 	}
+	
+	private void inputOfDate(String bday, String bmonth, String year, String groupName) {
+		new Select(driver.findElement(By.name("bday"))).selectByVisibleText(bday);
+		new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText(bmonth);
+				   driver.findElement(By.name("byear")).clear();
+				   driver.findElement(By.name("byear")).sendKeys(year);
+		new Select(driver.findElement(By.name("GroupName"))).selectByVisibleText(groupName);
+					}
 
 	protected void gotoAddNewContactPage() {
 	    driver.findElement(By.linkText("add new")).click();
