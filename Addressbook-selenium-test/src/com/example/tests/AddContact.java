@@ -8,8 +8,8 @@ public class AddContact extends TestBase {
 	
   @Test
   public void testAddNewContact() throws Exception {
-	openMainPage();
-    gotoAddNewContactPage();
+	app.getNavigationHelper().openMainPage();
+    app.getNavigationHelper().gotoAddNewContactPage();
     ContactDate contact = new ContactDate();
 	contact.firstName = "First name";
 	contact.lastName = "Last name";
@@ -25,8 +25,17 @@ public class AddContact extends TestBase {
 	contact.groupName = "new_group";
 	contact.address2 = "Address";
 	contact.home2 = "123";
-    fillNewContactForm(contact);
-    submitContactCreation();
-    returnToHomePage(); 
+    app.getContactHelper().fillNewContactForm (contact);
+    app.getContactHelper().submitContactCreation();
+    app.getContactHelper().returnToHomePage(); 
+  }
+  
+  @Test
+  public void AddEmrtyContact() throws Exception {
+	app.getNavigationHelper().openMainPage();
+    app.getNavigationHelper().gotoAddNewContactPage();
+    app.getContactHelper().fillNewContactForm( new ContactDate());
+    app.getContactHelper().submitContactCreation();
+    app.getContactHelper().returnToHomePage(); 
   }
 }

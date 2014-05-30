@@ -36,7 +36,7 @@ public class ContactDate {
 	public ContactDate(String first, String last, String address,
 			String phoneHome, String phoneWork, String phoneMobile, String mail_1,
 			String mail_2, String bday, String bmonth, String year,
-			String GroupName, String address2, String home2) {
+			String groupName, String address2, String home2) {
 		this.firstName = first;
 		this.lastName = last;
 		this.address = address;
