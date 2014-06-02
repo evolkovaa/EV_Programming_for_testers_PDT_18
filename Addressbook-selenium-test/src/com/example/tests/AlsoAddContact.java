@@ -8,10 +8,10 @@ public class AlsoAddContact extends TestBase {
 	
   @Test
   public void AddEmrtyContact() throws Exception {
-	openMainPage();
-    gotoAddNewContactPage();
-    fillNewContactForm(new ContactDate());
-    submitContactCreation();
-    returnToHomePage(); 
+	  app.getNavigationHelper().openMainPage();
+	  app.getNavigationHelper().gotoAddNewContactPage();
+	  app.getContactHelper().fillNewContactForm(new ContactDate());
+	  app.getContactHelper().submitContactCreation();
+	  app.getContactHelper().returnToHomePage(); 
   }
 }
